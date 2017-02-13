@@ -1,0 +1,22 @@
+﻿<script src="~/lib/jquery/dist/jquery.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $("a").click(function (e) {
+            if (navigator.userAgent.indexOf("Firefox") >= 0) {
+                window.event ? window.event.returnValue = false : e.preventDefault();
+            }
+            else {
+                e.preventDefault();//阻止浏览器默认事件
+            }
+            var href=$(this).attr("href");
+            window.location.href =  href;
+        });
+        $(".link a,.link xb a").click(function () {
+            alert("成功");
+            if ($(this).text() == "下一章" || $(this).text() == "上一章") {
+                   window.location.href = "@Url.Action("ChapterRead", "Read")?ChapterUri=" +  UrlHelper.Requst("oldbookuri")+href;
+            }
+        });
+    });
+</script>
+@Html.Raw(ViewBag.ReadValue)

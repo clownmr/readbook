@@ -1,0 +1,17 @@
+﻿<script src="~/lib/jquery/dist/jquery.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $("a").click(function (e) {
+            if (navigator.userAgent.indexOf("Firefox") >= 0) {
+                window.event ? window.event.returnValue = false : e.preventDefault();
+            }
+            else {
+                e.preventDefault();//阻止浏览器默认事件
+            }
+            var href=$(this).attr("href");
+            href = href.replace(/\//g, '~')
+            window.location.href = "@Url.Action("ChapterList", "Read")?bookuri=" + href+"&oldbookuri="+$(this).attr("href");
+        });
+    });
+</script>
+@Html.Raw(ViewBag.SearchResult)
